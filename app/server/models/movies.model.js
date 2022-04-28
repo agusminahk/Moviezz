@@ -6,9 +6,9 @@ Movies.init(
     {
         movieId: { type: DataTypes.INTEGER },
         title: { type: DataTypes.STRING },
-        genre: { type: DataTypes.STRING },
+        genres: { type: DataTypes.STRING },
     },
-    { sequelize, modelName: 'movies' }
+    { sequelize, modelName: 'movies', timestamps: false }
 );
 
 module.exports = Movies;

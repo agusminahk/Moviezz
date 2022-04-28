@@ -20,7 +20,7 @@ app.use((req, res) => {
     res.status(404).send({ error: 'Not found' });
 });
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     console.log('DATABASE connected');
     app.listen(process.env.PORT || 8080, () => {
         console.log(`App listening on ${process.env.PORT || 8080}`);
