@@ -1,7 +1,7 @@
 const router = require('express').Router();
-
+const moviesRouter = require('./movies.js');
 //
 
-router.get('/a', (req, res) => res.send('LLEGUE'));
+router.use('/movies', moviesRouter);
 
 module.exports = router;
