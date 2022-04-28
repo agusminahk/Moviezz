@@ -1,0 +1,7 @@
+{
+    "database": "test-db",
+    "dialect": "sqlite",
+    "host": "./dev.sqlite",
+    "post": 5432,
+    "logging": false
+}
