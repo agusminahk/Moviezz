@@ -6,19 +6,18 @@ import MovieCard from '../components/MovieCard.jsx';
 import Form from '../components/Form.jsx';
 
 const MainView = (props) => {
-    const { movies, setMovies, totalPages, page, setPage } = props;
+    const { movies, setMovies, totalPages, setPage } = props;
 
     const [showForm, setShowForm] = React.useState(false);
     const [toEdit, setToEdit] = React.useState({});
 
     const handleEdit = async (formValues) => {
-        const data = { ...formValues, genres: formValues.genres.split(',').join('+') };
         try {
-            await axios.put(`/movies/edit/${formValues.id}`, data);
+            await axios.put(`/movies/edit/${formValues.id}`, formValues);
         } catch (error) {
             console.error(error.message);
         }
-        const newData = movies.map((pelicula) => (pelicula.id === formValues.id ? data : pelicula));
+        const newData = movies.map((pelicula) => (pelicula.id === formValues.id ? formValues : pelicula));
 
         return setMovies(newData);
     };
@@ -64,7 +63,7 @@ const MainView = (props) => {
                 count={totalPages}
                 showFirstButton
                 showLastButton
-                onChange={(e, page) => setPage(page)}
+                onChange={(e, page) => setPage(page - 1)}
                 size="large"
                 variant="outlined"
                 shape="rounded"

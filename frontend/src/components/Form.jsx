@@ -36,9 +36,9 @@ const Form = ({ show, setShow, handleEdit, movie }) => {
                         <Grid item xs={12}>
                             <TextField
                                 InputLabelProps={{ shrink: true }}
-                                label="Genres"
+                                label="Genres (separar por comas)"
                                 type="text"
-                                name="genres"
+                                name="genero"
                                 fullWidth
                                 value={formValues.genero}
                                 onChange={handleInputChange}
