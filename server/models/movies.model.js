@@ -4,9 +4,11 @@ class Movies extends Model {}
 
 Movies.init(
     {
-        movieId: { type: DataTypes.INTEGER },
-        title: { type: DataTypes.STRING },
-        genres: { type: DataTypes.STRING },
+        titulo: { type: DataTypes.STRING, allowNull: false, notEmpty: true },
+        genero: { type: DataTypes.STRING },
+        año: { type: DataTypes.INTEGER },
+        director: { type: DataTypes.STRING },
+        actores: { type: DataTypes.STRING },
     },
     { sequelize, modelName: 'movies', timestamps: false }
 );

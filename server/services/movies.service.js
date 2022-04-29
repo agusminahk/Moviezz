@@ -12,7 +12,7 @@ class MoviesService {
 
         try {
             fs.createReadStream(direction)
-                .pipe(csv.parse({ headers: true }))
+                .pipe(csv.parse({ delimiter: ';', headers: true }))
                 .on('error', (error) => {
                     console.error(error);
                     throw error.message;
@@ -20,7 +20,8 @@ class MoviesService {
                 .on('data', (data) => movies.push(data))
                 .on('end', async () => {
                     movies.forEach(async (movie) => {
-                        const pelicula = await MoviesModel.findOne({ where: { title: movie.title } });
+                        const pelicula = await MoviesModel.findOne({ where: { titulo: movie.titulo } });
+                        console.log(pelicula);
                         return !pelicula && (await MoviesModel.create(movie));
                     });
                 });
@@ -40,11 +41,11 @@ class MoviesService {
 
     static async editMovie(body, id) {
         try {
-            const find = await MoviesModel.findOne({ where: { title: body.title } });
+            const find = await MoviesModel.findOne({ where: { titulo: body.titulo } });
 
-            if (find?.dataValues?.title === body.title) {
+            if (find?.dataValues?.titulo === body.titulo) {
                 const result = await MoviesModel.update(
-                    { movieId: body.movieId, genres: body.genres },
+                    { genero: body.genero, año: body.year, actores: body.actores, director: body.director },
                     {
                         where: { id: id },
                         returning: true,
