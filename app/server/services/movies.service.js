@@ -57,7 +57,7 @@ class MoviesService {
 
     static async deleteMovie(id) {
         try {
-            const movie = MoviesModel.destroy({ where: { id: id } });
+            await MoviesModel.destroy({ where: { id: id } });
 
             return { error: false, data: true };
         } catch (error) {
@@ -65,7 +65,15 @@ class MoviesService {
         }
     }
 
-    static async getMovies() {}
+    static async getMovies() {
+        try {
+            const movies = await MoviesModel.findAll({ raw: true });
+
+            return { error: false, data: movies };
+        } catch (error) {
+            return { error: true, data: error.message };
+        }
+    }
 }
 
 module.exports = MoviesService;

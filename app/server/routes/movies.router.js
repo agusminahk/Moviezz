@@ -3,7 +3,7 @@ const moviesController = require('../controllers/movies.controller');
 const upload = require('../middleware/multer');
 
 // Get all Movies
-router.get('/', (req, res) => moviesController.getMovies);
+router.get('/', moviesController.getMovies);
 
 // Upload Movies
 router.post('/upload', upload.single('file'), moviesController.uploadMovies);
