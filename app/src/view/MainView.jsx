@@ -3,16 +3,29 @@ import axios from 'axios';
 import { Box, Typography, Divider, Grid } from '@mui/material';
 import MovieCard from '../components/MovieCard.jsx';
 
+import Form from '../components/Form.jsx';
+
 const MainView = (props) => {
     const { movies, setMovies } = props;
 
-    const handleEdit = (id, newData) => {
-        axios.put(`/movies/edit/${id}`, newData);
+    const [showForm, setShowForm] = React.useState(false);
+    const [toEdit, setToEdit] = React.useState({});
+
+    const handleEdit = async (formValues) => {
+        const data = { ...formValues, genres: formValues.genres.split(',').join('+') };
+        try {
+            await axios.put(`/movies/edit/${formValues.id}`, data);
+        } catch (error) {
+            console.error(error.message);
+        }
+        const newData = movies.map((pelicula) => (pelicula.id === formValues.id ? data : pelicula));
+
+        return setMovies(newData);
     };
 
-    const handleDelete = (id) => {
-        axios.delete(`/movies/edit/${id}`);
-        setMovies(movies.filter((movie) => movie !== id));
+    const handleDelete = async (id) => {
+        await axios.delete(`/movies/edit/${id}`);
+        return setMovies(movies.filter((movie) => movie !== id));
     };
 
     return (
@@ -33,10 +46,17 @@ const MainView = (props) => {
                 }}
             >
                 {movies.length &&
-                    movies.map((pelicula) => (
-                        <MovieCard movie={pelicula} handleEdit={handleEdit} handleDelete={handleDelete} />
+                    movies.map((pelicula, key) => (
+                        <MovieCard
+                            key={key}
+                            movie={pelicula}
+                            handleDelete={handleDelete}
+                            toEdit={setToEdit}
+                            setShowForm={setShowForm}
+                        />
                     ))}
             </Grid>
+            <Form show={showForm} setShow={setShowForm} handleEdit={handleEdit} movie={toEdit} />
         </Box>
     );
 };

@@ -40,9 +40,19 @@ class MoviesService {
 
     static async editMovie(body, id) {
         try {
-            const movie = await MoviesModel.findOne({ where: { title: body.title } });
+            const find = await MoviesModel.findOne({ where: { title: body.title } });
 
-            if (movie) return { error: true, data: 'Ya existe una pelicula con ese nombre' };
+            if (find?.dataValues?.title === body.title) {
+                const result = await MoviesModel.update(
+                    { movieId: body.movieId, genres: body.genres },
+                    {
+                        where: { id: id },
+                        returning: true,
+                    }
+                );
+
+                return { error: false, data: result[1] };
+            }
 
             const result = await MoviesModel.update(body, {
                 where: { id: id },

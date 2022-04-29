@@ -6,7 +6,8 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import poster from '../assets/default_poster.jpeg';
 
 const MovieCard = (props) => {
-    const { movie, handleEdit, handleDelete } = props;
+    const { movie, toEdit, handleDelete, setShowForm } = props;
+    const [movieEdited, setMovieEdited] = React.useState(movie);
 
     const [genero1, genero2] = movie.genres.split('+');
 
@@ -64,13 +65,17 @@ const MovieCard = (props) => {
                         color="error"
                         children={<DeleteForeverIcon />}
                         size="large"
+                        onClick={() => handleDelete(movie.id)}
                         sx={{ backgroundColor: 'rgba(255,173,173, .33)' }}
                     />
                     <IconButton
                         color="primary"
                         size="large"
                         children={<ModeEditIcon />}
-                        onClick={() => handleDelete(movie.id)}
+                        onClick={() => {
+                            toEdit(movie);
+                            setShowForm(true);
+                        }}
                         sx={{ backgroundColor: 'rgba(142,236,245, .33)' }}
                     />
                 </Box>
