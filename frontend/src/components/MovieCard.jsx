@@ -31,10 +31,39 @@ const MovieCard = (props) => {
                     justifyContent: 'space-evenly',
                 }}
             >
-                <Typography variant="caption " sx={{ textAlign: 'center', minHeight: '50px', alignContent: 'center' }}>
-                    {titulo}
-                </Typography>
+                <Box
+                    variant="caption"
+                    sx={{
+                        width: '80%',
+                        display: 'flex',
+                        textAlign: 'center',
+                        justifyContent: 'space-evenly',
+                        margin: '0px auto',
+                    }}
+                >
+                    <Typography sx={{ flexGrow: 1, fontSize: '1.1rem', margin: '0px 5px' }}>{titulo}</Typography>
+                    <Chip
+                        color="info"
+                        label={año}
+                        sx={{
+                            // width: '25%',
+                            textAlign: 'center',
+                            alignContent: 'center',
+                            margin: '0px auto',
+                        }}
+                    />
+                </Box>
                 <Box component="img" src={poster} sx={{ height: '250px', margin: '20px auto' }} />
+                <Chip
+                    color="success"
+                    label={`Director: ${director}`}
+                    sx={{
+                        width: '100%',
+                        textAlign: 'center',
+                        alignContent: 'center',
+                        margin: '0px auto',
+                    }}
+                />
 
                 <Stack
                     sx={{
