@@ -8,9 +8,9 @@ class Movies {
     }
 
     static async editMovie(req, res, next) {
-        const { data, error } = await MoviesService.editMovie(req.body, req.params.id);
+        const info = await MoviesService.editMovie(req.body, req.params.id);
 
-        return error ? res.status(404).send({ message: error }) : res.json({ data });
+        return info.error ? res.status(404).send(info) : res.json(info);
     }
 }
 
