@@ -76,11 +76,11 @@ class MoviesService {
         }
     }
 
-    static async getMovies() {
+    static async getMovies(page, size) {
         try {
-            const movies = await MoviesModel.findAll({ raw: true });
+            const movies = await MoviesModel.findAndCountAll({ limit: size, offset: page * size });
 
-            return { error: false, data: movies };
+            return { error: false, data: { content: movies.rows, totalPages: Math.ceil(movies.count / size) } };
         } catch (error) {
             return { error: true, data: error.message };
         }

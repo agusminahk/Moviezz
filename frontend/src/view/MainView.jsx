@@ -8,6 +8,8 @@ import Form from '../components/Form.jsx';
 const MainView = (props) => {
     const { movies, setMovies } = props;
 
+    setMovies(movies.slice(0, 10));
+
     const [showForm, setShowForm] = React.useState(false);
     const [toEdit, setToEdit] = React.useState({});
 
