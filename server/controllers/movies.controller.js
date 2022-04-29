@@ -20,7 +20,7 @@ class Movies {
     }
 
     static async getMovies(req, res, next) {
-        const { error, data } = await MoviesService.getMovies(req.query.page, req.query.size);
+        const { error, data } = await MoviesService.getMovies(req.query.page, req.query.size, req.query);
 
         return error ? res.status(404).send(error) : res.json(data);
     }

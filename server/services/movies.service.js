@@ -1,6 +1,7 @@
 const csv = require('fast-csv');
 const fs = require('fs');
 const path = require('path');
+const Op = require('sequelize').Op;
 
 const MoviesModel = require('../models/movies.model.js');
 
@@ -76,8 +77,30 @@ class MoviesService {
         }
     }
 
-    static async getMovies(page, size) {
+    static async getMovies(page, size, query) {
         try {
+            const titulo = query.titulo || '';
+            const año = query.year || '';
+            const director = query.director || '';
+            const actores = query.actores || '';
+            const genero = query.genero || '';
+
+            if (titulo || año || director || actores || genero) {
+                const result = await MoviesModel.findAndCountAll({
+                    where: {
+                        titulo: { [Op.like]: '%' + titulo + '%' },
+                        año: { [Op.like]: '%' + año + '%' },
+                        director: { [Op.like]: '%' + director + '%' },
+                        actores: { [Op.like]: '%' + actores + '%' },
+                        genero: { [Op.like]: '%' + genero + '%' },
+                    },
+                    limit: size,
+                    offset: page * size,
+                });
+
+                return { error: false, data: { content: result.rows, totalPages: Math.ceil(result.count / size) } };
+            }
+
             const movies = await MoviesModel.findAndCountAll({ limit: size, offset: page * size });
 
             return { error: false, data: { content: movies.rows, totalPages: Math.ceil(movies.count / size) } };

@@ -7,7 +7,7 @@ import Form from '../components/Form.jsx';
 import Filter from '../components/Filter.jsx';
 
 const MainView = (props) => {
-    const { movies, setMovies, totalPages, setPage } = props;
+    const { movies, setMovies, totalPages, setTotalPages, setPage } = props;
 
     const [showForm, setShowForm] = React.useState(false);
     const [toEdit, setToEdit] = React.useState({});
@@ -33,7 +33,7 @@ const MainView = (props) => {
             <Box sx={{ display: 'flex' }}>
                 <Typography>Titulo</Typography>
             </Box>
-            <Filter />
+            <Filter movies={movies} setMovies={setMovies} setTotalPages={setTotalPages} />
 
             <Divider />
 

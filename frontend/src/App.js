@@ -22,7 +22,13 @@ function App() {
 
     return (
         <>
-            <MainView movies={movies} setMovies={setMovies} setPage={setPage} totalPages={totalPages} />
+            <MainView
+                movies={movies}
+                setMovies={setMovies}
+                setPage={setPage}
+                totalPages={totalPages}
+                setTotalPages={setTotalPages}
+            />
         </>
     );
 }
