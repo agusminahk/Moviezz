@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, IconButton, Chip } from '@mui/material';
+import { Box, Grid, Typography, IconButton, Chip, Stack } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
@@ -8,12 +8,12 @@ import poster from '../assets/default_poster.jpeg';
 const MovieCard = (props) => {
     const { movie, toEdit, handleDelete, setShowForm } = props;
 
-    const [genero1, genero2] = movie.genres.split('+');
+    const { id, titulo, genero, año, director, actores } = movie;
 
     return (
         <Grid
             item
-            xs={2}
+            xs={3}
             sx={{
                 height: '520px',
                 margin: '10px',
@@ -32,26 +32,32 @@ const MovieCard = (props) => {
                 }}
             >
                 <Typography variant="caption " sx={{ textAlign: 'center', minHeight: '50px', alignContent: 'center' }}>
-                    {movie.title}
+                    {titulo}
                 </Typography>
                 <Box component="img" src={poster} sx={{ height: '250px', margin: '20px auto' }} />
 
-                <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    {genero1 && (
+                <Stack
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        flexDirection: 'row',
+                        alignContent: 'center',
+                        justifyContent: 'space-around',
+                    }}
+                >
+                    {genero.split(', ').map((genre, i) => (
                         <Chip
-                            label={genero1}
+                            key={i}
+                            label={genre}
                             color="primary"
-                            sx={{ margin: '5px', boxShadow: ' 0 10px 60px 0 rgba(145, 151, 179, 0.5)' }}
+                            sx={{
+                                margin: '3px',
+                                boxShadow: ' 0 10px 60px 0 rgba(145, 151, 179, 0.5)',
+                                width: '30%',
+                            }}
                         />
-                    )}
-                    {genero2 && (
-                        <Chip
-                            label={genero2}
-                            color="primary"
-                            sx={{ margin: '5px', boxShadow: ' 0 10px 60px 0 rgba(145, 151, 179, 0.5)' }}
-                        />
-                    )}
-                </Box>
+                    ))}
+                </Stack>
 
                 <Box
                     sx={{
@@ -64,7 +70,7 @@ const MovieCard = (props) => {
                         color="error"
                         children={<DeleteForeverIcon />}
                         size="large"
-                        onClick={() => handleDelete(movie.id)}
+                        onClick={() => handleDelete(id)}
                         sx={{ backgroundColor: 'rgba(255,173,173, .33)' }}
                     />
                     <IconButton
