@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 const useForm = (show, setShow, handleEdit, movie) => {
     const [formValues, setFormValues] = useState({
         id: '',
-        movieId: '',
-        title: '',
-        genres: '',
+        titulo: '',
+        genero: '',
+        año: '',
+        actores: '',
     });
 
     const handleInputChange = (e) => {
@@ -22,9 +23,10 @@ const useForm = (show, setShow, handleEdit, movie) => {
     useEffect(() => {
         setFormValues({
             id: movie.id || '',
-            movieId: movie.movieId || '',
-            title: movie.title || '',
-            genres: movie.genres || '',
+            titulo: movie.titulo || '',
+            genero: movie.genero || '',
+            director: movie.director || '',
+            año: movie.año || '',
         });
     }, [show]);
 

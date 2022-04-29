@@ -45,7 +45,7 @@ class MoviesService {
 
             if (find?.dataValues?.titulo === body.titulo) {
                 const result = await MoviesModel.update(
-                    { genero: body.genero, año: body.year, actores: body.actores, director: body.director },
+                    { genero: body.genero, año: body.año, actores: body.actores, director: body.director },
                     {
                         where: { id: id },
                         returning: true,

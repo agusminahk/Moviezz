@@ -6,8 +6,6 @@ import useForm from '../hooks/useForm';
 const Form = ({ show, setShow, handleEdit, movie }) => {
     const { formValues, handleInputChange, handleSubmit } = useForm(show, setShow, handleEdit, movie);
 
-    const genres = formValues.genres.replace(/[+]/g, ',');
-
     return (
         <>
             <Dialog
@@ -30,7 +28,7 @@ const Form = ({ show, setShow, handleEdit, movie }) => {
                                 type="text"
                                 fullWidth
                                 name="title"
-                                value={formValues.title}
+                                value={formValues.titulo}
                                 InputLabelProps={{ shrink: true }}
                                 onChange={(e) => handleInputChange(e)}
                             />
@@ -42,7 +40,7 @@ const Form = ({ show, setShow, handleEdit, movie }) => {
                                 type="text"
                                 name="genres"
                                 fullWidth
-                                value={genres}
+                                value={formValues.genero}
                                 onChange={handleInputChange}
                             />
                         </Grid>
