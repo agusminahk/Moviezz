@@ -1,42 +1,22 @@
+const { resolveSoa } = require('dns');
 const csv = require('fast-csv');
 const fs = require('fs');
 const path = require('path');
 
 const MoviesModel = require('../models/movies.model.js');
+const MoviesService = require('../services/movies.service.js');
 
 class Movies {
     static async uploadMovies(req, res, next) {
-        const movies = [];
-        const direction = path.join('./uploads/', req.file.filename);
+        const { error } = await MoviesService.uploadMovies(req.file);
 
-        try {
-            fs.createReadStream(direction)
-                .pipe(csv.parse({ headers: true }))
-                .on('error', (error) => {
-                    console.error(error);
-                    throw error.message;
-                })
-                .on('data', (data) => movies.push(data))
-                .on('end', async () => {
-                    await MoviesModel.bulkCreate(movies);
+        return error ? res.status(404).send({ message: error }) : res.json({ message: 'Upload Successfully' });
+    }
 
-                    const result = {
-                        status: 'ok',
-                        filename: req.file.originalname,
-                        message: 'Upload Successfully',
-                    };
+    static async editMovies(req, res, next) {
+        const { data, error } = await MoviesService.uploadMovies(req.body);
 
-                    res.json(result);
-                });
-        } catch (error) {
-            const result = {
-                status: 'ok',
-                filename: req.file.originalname,
-                message: 'Upload Error = ' + error.message,
-            };
-
-            res.json(result);
-        }
+        return error ? res.status(404).send({ message: error }) : res.json({ data });
     }
 }
 
