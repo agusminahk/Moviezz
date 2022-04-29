@@ -7,7 +7,6 @@ import poster from '../assets/default_poster.jpeg';
 
 const MovieCard = (props) => {
     const { movie, toEdit, handleDelete, setShowForm } = props;
-    const [movieEdited, setMovieEdited] = React.useState(movie);
 
     const [genero1, genero2] = movie.genres.split('+');
 
