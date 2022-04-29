@@ -14,7 +14,7 @@ function App() {
 
     return (
         <>
-            <MainView movies={movies} />
+            <MainView movies={movies} setMovies={setMovies} />
         </>
     );
 }
