@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Box, Typography, Divider, Grid, Pagination } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Divider, Grid, Pagination, Button } from '@mui/material';
 
 import MovieCard from '../components/MovieCard.jsx';
 import Form from '../components/Form.jsx';
@@ -11,6 +12,8 @@ const MainView = (props) => {
 
     const [showForm, setShowForm] = React.useState(false);
     const [toEdit, setToEdit] = React.useState({});
+
+    const navigate = useNavigate();
 
     const handleEdit = async (formValues) => {
         try {
@@ -31,7 +34,12 @@ const MainView = (props) => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex' }}>
-                <Typography>Titulo</Typography>
+                <Typography variant="h5" sx={{ width: '80%', margin: '10px auto', textAlign: ' center', flexGrow: 1 }}>
+                    -MovieZ- by Agustin
+                </Typography>
+                <Button variant="contained" color="warning" sx={{ margin: '10px' }} onClick={() => navigate('/csv')}>
+                    Añadir Peliculas
+                </Button>
             </Box>
             <Filter movies={movies} setMovies={setMovies} setTotalPages={setTotalPages} />
 

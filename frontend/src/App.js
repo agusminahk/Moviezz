@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
-import { Box } from '@mui/material';
+
 import MainView from './view/MainView';
+import AddCsv from './components/AddCsv';
 
 function App() {
     const [page, setPage] = useState(0);
@@ -22,13 +24,23 @@ function App() {
 
     return (
         <>
-            <MainView
-                movies={movies}
-                setMovies={setMovies}
-                setPage={setPage}
-                totalPages={totalPages}
-                setTotalPages={setTotalPages}
-            />
+            <Routes>
+                <Route
+                    exact
+                    path="/"
+                    element={
+                        <MainView
+                            movies={movies}
+                            setMovies={setMovies}
+                            setPage={setPage}
+                            totalPages={totalPages}
+                            setTotalPages={setTotalPages}
+                        />
+                    }
+                />
+
+                <Route path="/csv" element={<AddCsv />} />
+            </Routes>
         </>
     );
 }
