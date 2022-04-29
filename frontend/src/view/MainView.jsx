@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Box, Typography, Divider, Grid, Pagination } from '@mui/material';
-import MovieCard from '../components/MovieCard.jsx';
 
+import MovieCard from '../components/MovieCard.jsx';
 import Form from '../components/Form.jsx';
+import Filter from '../components/Filter.jsx';
 
 const MainView = (props) => {
     const { movies, setMovies, totalPages, setPage } = props;
@@ -31,8 +32,8 @@ const MainView = (props) => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex' }}>
                 <Typography>Titulo</Typography>
-                <Box>Filtro</Box>
             </Box>
+            <Filter />
 
             <Divider />
 

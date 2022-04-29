@@ -27,7 +27,7 @@ const Form = ({ show, setShow, handleEdit, movie }) => {
                                 label="Titulo"
                                 type="text"
                                 fullWidth
-                                name="title"
+                                name="titulo"
                                 value={formValues.titulo}
                                 InputLabelProps={{ shrink: true }}
                                 onChange={(e) => handleInputChange(e)}
