@@ -37,6 +37,19 @@ class MoviesService {
             return { error: true, data: result };
         }
     }
+
+    static async editMovie(body, id) {
+        try {
+            const result = await MoviesModel.update(body, {
+                where: { id: id },
+                returning: true,
+            });
+
+            return { error: false, data: result[1] };
+        } catch (error) {
+            return { error: true, data: error.message };
+        }
+    }
 }
 
 module.exports = MoviesService;
