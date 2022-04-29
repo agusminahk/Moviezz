@@ -54,6 +54,18 @@ class MoviesService {
             return { error: true, data: error.message };
         }
     }
+
+    static async deleteMovie(id) {
+        try {
+            const movie = MoviesModel.destroy({ where: { id: id } });
+
+            return { error: false, data: true };
+        } catch (error) {
+            return { error: true, data: error.message };
+        }
+    }
+
+    static async getMovies() {}
 }
 
 module.exports = MoviesService;

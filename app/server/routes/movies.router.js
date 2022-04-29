@@ -2,8 +2,16 @@ const router = require('express').Router();
 const moviesController = require('../controllers/movies.controller');
 const upload = require('../middleware/multer');
 
-router.get('/', (req, res) => res.send('LLEGUE'));
+// Get all Movies
+router.get('/', (req, res) => moviesController.getMovies);
+
+// Upload Movies
 router.post('/upload', upload.single('file'), moviesController.uploadMovies);
+
+// Edit a Movie
 router.put('/edit/:id', moviesController.editMovie);
+
+// Delete Movie
+router.delete('/delete/:id', moviesController.deleteMovie);
 
 module.exports = router;

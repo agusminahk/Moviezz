@@ -12,6 +12,18 @@ class Movies {
 
         return info.error ? res.status(404).send(info) : res.json(info);
     }
+
+    static async deleteMovie(req, res, next) {
+        const { error, data } = await MoviesService.deleteMovie(req.params.id);
+
+        return error ? res.status(404).send(error) : res.json({ deleted: data });
+    }
+
+    static async getMovies(req, res, next) {
+        const { error, data } = await MoviesService.getMovies();
+
+        return error ? res.status(404).send(error) : res.json(data);
+    }
 }
 
 module.exports = Movies;
