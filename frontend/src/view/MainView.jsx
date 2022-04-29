@@ -1,14 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { Box, Typography, Divider, Grid } from '@mui/material';
+import { Box, Typography, Divider, Grid, Pagination } from '@mui/material';
 import MovieCard from '../components/MovieCard.jsx';
 
 import Form from '../components/Form.jsx';
 
 const MainView = (props) => {
-    const { movies, setMovies } = props;
-
-    setMovies(movies.slice(0, 10));
+    const { movies, setMovies, totalPages, page, setPage } = props;
 
     const [showForm, setShowForm] = React.useState(false);
     const [toEdit, setToEdit] = React.useState({});
@@ -58,7 +56,20 @@ const MainView = (props) => {
                         />
                     ))}
             </Grid>
+
             <Form show={showForm} setShow={setShowForm} handleEdit={handleEdit} movie={toEdit} />
+
+            <Pagination
+                sx={{ height: '70px', alignContent: 'center', margin: 'auto' }}
+                count={totalPages}
+                showFirstButton
+                showLastButton
+                onChange={(e, page) => setPage(page)}
+                size="large"
+                variant="outlined"
+                shape="rounded"
+                color="primary"
+            />
         </Box>
     );
 };
