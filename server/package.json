@@ -6,6 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "server": "nodemon app.js",
+        "serve": "node app.js",
         "postInstall": "createdb test-db"
     },
     "keywords": [],
