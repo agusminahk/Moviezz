@@ -10,7 +10,6 @@ class MoviesService {
         const movies = [];
         let result;
         const direction = path.join('./uploads/', file.filename);
-
         try {
             fs.createReadStream(direction)
                 .pipe(csv.parse({ delimiter: ';', headers: true }))
@@ -22,7 +21,6 @@ class MoviesService {
                 .on('end', async () => {
                     movies.forEach(async (movie) => {
                         const pelicula = await MoviesModel.findOne({ where: { titulo: movie.titulo } });
-                        console.log(pelicula);
                         return !pelicula && (await MoviesModel.create(movie));
                     });
                 });
@@ -80,7 +78,7 @@ class MoviesService {
     static async getMovies(page, size, query) {
         try {
             const titulo = query.titulo || '';
-            const año = query.year || '';
+            const año = query.año || '';
             const director = query.director || '';
             const actores = query.actores || '';
             const genero = query.genero || '';

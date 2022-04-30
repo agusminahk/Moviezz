@@ -64,6 +64,16 @@ const MovieCard = (props) => {
                         margin: '0px auto',
                     }}
                 />
+                <Chip
+                    color="warning"
+                    label={`Actores: ${actores}`}
+                    sx={{
+                        width: '100%',
+                        textAlign: 'center',
+                        alignContent: 'center',
+                        margin: '0px auto',
+                    }}
+                />
 
                 <Stack
                     sx={{

@@ -30,7 +30,6 @@ const Filter = ({ movies, setMovies, setTotalPages }) => {
         const name = e.target.name;
 
         setFilterValues({ ...filterValues, [name]: e.target.value });
-        console.log(filterValues);
     };
 
     return (
