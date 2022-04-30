@@ -36,11 +36,45 @@ const Form = ({ show, setShow, handleEdit, movie }) => {
                         <Grid item xs={12}>
                             <TextField
                                 InputLabelProps={{ shrink: true }}
+                                label="Director"
+                                type="text"
+                                name="director"
+                                fullWidth
+                                value={formValues.director}
+                                onChange={handleInputChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                InputLabelProps={{ shrink: true }}
+                                label="Actores"
+                                type="text"
+                                name="actores"
+                                fullWidth
+                                value={formValues.actores}
+                                onChange={handleInputChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                InputLabelProps={{ shrink: true }}
                                 label="Genres (separar por comas)"
                                 type="text"
                                 name="genero"
                                 fullWidth
                                 value={formValues.genero}
+                                onChange={handleInputChange}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField
+                                InputLabelProps={{ shrink: true }}
+                                label="Año"
+                                type="text"
+                                name="año"
+                                fullWidth
+                                value={formValues.año}
                                 onChange={handleInputChange}
                             />
                         </Grid>

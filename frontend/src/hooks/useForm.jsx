@@ -6,6 +6,7 @@ const useForm = (show, setShow, handleEdit, movie) => {
         titulo: '',
         genero: '',
         año: '',
+        director: '',
         actores: '',
     });
 
@@ -26,6 +27,7 @@ const useForm = (show, setShow, handleEdit, movie) => {
             titulo: movie.titulo || '',
             genero: movie.genero || '',
             director: movie.director || '',
+            actores: movie.actores || '',
             año: movie.año || '',
         });
     }, [show]);

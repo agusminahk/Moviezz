@@ -11,7 +11,7 @@ function App() {
     const [movies, setMovies] = useState([]);
 
     React.useEffect(() => {
-        axios.get(`/movies?page=${page}&size=21`).then(({ data, status }) => {
+        axios.get(process.env.REACT_APP_REST_BACK + `/movies?page=${page}&size=21`).then(({ data, status }) => {
             if (status === 200) {
                 setMovies(data.content);
                 setTotalPages(data.totalPages);

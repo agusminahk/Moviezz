@@ -17,7 +17,7 @@ const MainView = (props) => {
 
     const handleEdit = async (formValues) => {
         try {
-            await axios.put(`/movies/edit/${formValues.id}`, formValues);
+            await axios.put(process.env.REACT_APP_REST_BACK + `/movies/edit/${formValues.id}`, formValues);
         } catch (error) {
             console.error(error.message);
         }
@@ -27,7 +27,7 @@ const MainView = (props) => {
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`/movies/edit/${id}`);
+        await axios.delete(process.env.REACT_APP_REST_BACK + `/movies/edit/${id}`);
         return setMovies(movies.filter((movie) => movie !== id));
     };
 

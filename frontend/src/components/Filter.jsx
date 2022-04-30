@@ -7,7 +7,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Filter = ({ movies, setMovies, setTotalPages }) => {
+const Filter = ({ setMovies, setTotalPages }) => {
     const [filterValues, setFilterValues] = React.useState({
         titulo: '',
         director: '',
@@ -19,7 +19,7 @@ const Filter = ({ movies, setMovies, setTotalPages }) => {
     const handleSubmit = async ({ titulo, director, año, actores, genero }) => {
         const query = `titulo=${titulo}&director=${director}&año=${año}&actores=${actores}&genero=${genero}`;
 
-        const moviesFilter = await axios.get(`/movies?page=0&size=21&${query}`);
+        const moviesFilter = await axios.get(process.env.REACT_APP_REST_BACK + `/movies?page=0&size=21&${query}`);
         if (moviesFilter.status === 200) {
             setMovies(moviesFilter.data.content);
             setTotalPages(moviesFilter.data.totalPages);
